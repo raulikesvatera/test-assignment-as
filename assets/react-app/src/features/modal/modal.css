@@ -1,0 +1,6 @@
+.modal-card {
+    resize: vertical;
+}
+.modal {
+    --bulma-modal-content-width: 60rem !important;
+}
