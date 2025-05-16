@@ -13,13 +13,13 @@ function App() {
   return (
     <div className="section">
         <div className="container">
-        <Provider store={store}>
+            <Provider store={store}>
                 <ReactNotifications></ReactNotifications>
                 <Filter></Filter>
-        </Provider>
+            </Provider>
         </div>
     </div>
-);
+  );
 }
 
 const container = document.getElementById('root');
