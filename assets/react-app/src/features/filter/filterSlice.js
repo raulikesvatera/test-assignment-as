@@ -104,7 +104,7 @@ export const filterSlice = createSlice({
 
             if (action.payload?.errors) {
                 action.payload.errors.forEach(error => {
-                    Notification.warning(error.message)
+                    Notification.error(error.message)
                 });
             }
             state.status = 'failed';

@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import './styles/bulma.scss';
+import './styles/app.css';
 import 'react-notifications-component/dist/theme.css'
 
 function App() {
