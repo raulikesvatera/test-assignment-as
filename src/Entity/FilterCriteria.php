@@ -32,12 +32,7 @@ class FilterCriteria
     #[Assert\NotBlank(message: 'The criteria value field cannot be empty')]
     private ?string $value = null;
 
-//    #[ORM\Column(name: "filter_id", nullable: true)]
-//    #[Groups(['filter:read'])]
-//    private ?int $filter_id = null;
-
     #[ORM\ManyToOne(targetEntity: Filter::class, inversedBy: 'filterCriteriaCollection')]
-//    #[Groups(['filter:read'])]
     private ?Filter $filter = null;
 
     public function getFilter(): ?Filter
@@ -99,17 +94,4 @@ class FilterCriteria
 
         return $this;
     }
-
-//    public function getFilterId(): ?int
-//    {
-//        return $this->filter_id;
-//    }
-//
-//    public function setFilterId(?int $filterId): static
-//    {
-//        $this->filter_id = $filterId;
-//
-//        return $this;
-//    }
-
 }
