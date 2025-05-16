@@ -4,18 +4,21 @@ export const modalSlice = createSlice({
     name: 'modal',
     initialState: {
         isOpen: false,
-        componentName: null,
+        contentComponentName: null,
+        footerComponentName: null,
         title: '',
     },
     reducers: {
         modalOpen: (state, action) => {
             state.isOpen = true;
-            state.componentName = action.payload.componentName;
+            state.contentComponentName = action.payload.contentComponentName;
+            state.footerComponentName = action.payload.footerComponentName;
             state.title = action.payload.title;
         },
         modalClose: state => {
             state.isOpen = false;
-            state.componentName = null;
+            state.contentComponentName = null;
+            state.footerComponentName = null;
         }
     }
 });

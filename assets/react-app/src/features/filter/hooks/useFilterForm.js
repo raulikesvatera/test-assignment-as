@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import { modalOpen, modalClose } from "../../modal/modalSlice";
 import { useDispatch } from 'react-redux';
-import { setIsModalDialogMode, setFormIsVisible } from "../filterSlice";
+import {setIsModalDialogMode, setFormIsVisible, saveFilterAsync} from "../filterSlice";
+import Notification from "../../../utils/Notification";
 
 export const useFilterForm = () => {
     const stateFilter = useSelector(state => state.filter);
@@ -12,7 +13,11 @@ export const useFilterForm = () => {
         dispatch(setFormIsVisible(true));
 
         if (stateFilter.isModalDialogMode) {
-            dispatch(modalOpen({componentName: 'features/filter/FilterForm', title: 'Filter form'}));
+            dispatch(modalOpen({
+                contentComponentName: 'features/filter/FilterForm',
+                footerComponentName: 'features/filter/FilterFormButtons',
+                title: 'Filter form'
+            }));
         }
     }
 
@@ -27,10 +32,32 @@ export const useFilterForm = () => {
         if (stateFilter.isModalDialogMode) {
             dispatch(modalClose());
         } else {
-            dispatch(modalOpen({componentName: 'features/filter/FilterForm', title: 'Filter form'}));
+            dispatch(modalOpen({
+                contentComponentName: 'features/filter/FilterForm',
+                footerComponentName: 'features/filter/FilterFormButtons',
+                title: 'Filter form'
+            }));
         }
     }
 
-    return { openForm, closeForm, isModalDialogModeToggle };
+    const handleSubmitForm = (event) => {
+        event.preventDefault();
+
+        const form = document.getElementById('filter-form');
+
+        if (!(stateFilter.formData.filterCriteriaCollection.length > 0)) {
+            Notification.warning('Please add at least one criteria');
+            return;
+        }
+
+        if (form.checkValidity()) {
+            dispatch(saveFilterAsync());
+            closeForm();
+        } else {
+            form.reportValidity();
+        }
+    }
+
+    return { openForm, closeForm, isModalDialogModeToggle, handleSubmitForm };
 
 };

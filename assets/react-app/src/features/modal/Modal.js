@@ -24,9 +24,10 @@ const Modal = () => {
 
     if (!stateModal.isOpen) return null;
 
-    if (!stateModal.componentName) return null;
+    if (!stateModal.contentComponentName) return null;
 
-    const ModalComponent = getModalComponent(stateModal.componentName);
+    const ContentComponentName = getModalComponent(stateModal.contentComponentName);
+    const FooterComponentName = getModalComponent(stateModal.footerComponentName);
 
     return (
         <div className="modal" style={{display: 'block'}}>
@@ -37,16 +38,14 @@ const Modal = () => {
                     <button className="delete" aria-label="close" onClick={() => dispatch(modalClose())}></button>
                 </header>
                 <section className="modal-card-body">
-
                     <Suspense fallback={<div>Loading...</div>}>
-                        <ModalComponent/>
+                        <ContentComponentName/>
                     </Suspense>
                 </section>
                 <footer className="modal-card-foot">
-                    {/*<div className="buttons">*/}
-                    {/*    <button className="button is-success">Save changes</button>*/}
-                    {/*    <button className="button">Cancel</button>*/}
-                    {/*</div>*/}
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <FooterComponentName/>
+                    </Suspense>
                 </footer>
             </div>
         </div>

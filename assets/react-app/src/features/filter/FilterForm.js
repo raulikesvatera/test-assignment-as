@@ -3,7 +3,6 @@ import FilterFormCriteria from "./FilterFormCriteria";
 import { updateFormData, saveFilterAsync, setFormData } from "./filterSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { useFilterForm } from "./hooks/useFilterForm";
-import Notification from "../../utils/Notification";
 
 import './filter.css';
 
@@ -30,28 +29,9 @@ const FilterForm = () => {
         dispatch(setFormData(newFormData))
     }
 
-    const handleSubmitForm = (event) => {
-
-        event.preventDefault();
-
-        const form = event.target.closest('form');
-
-        if (!(stateFilter.formData.filterCriteriaCollection.length > 0)) {
-            Notification.warning('Please add at least one criteria');
-            return;
-        }
-
-        if (form.checkValidity()) {
-            dispatch(saveFilterAsync());
-            closeForm();
-        } else {
-            form.reportValidity();
-        }
-    }
-
     return (
         <div>
-            <form onSubmit={handleSubmitForm}>
+            <form id="filter-form">
                 <div className={'field is-horizontal'}>
                     <div className={'field-label is-normal'}>
                         <label className={'label'} htmlFor="filter-form-modal-dialog-mode" >Modal Dialog Mode</label>
@@ -142,10 +122,6 @@ const FilterForm = () => {
                     </div>
                 </div>
                 <br/>
-                <div className={'buttons is-justify-content-flex-end\n'}>
-                    <button className={'button'} onClick={() => closeForm()}>Close</button>
-                    <button className={'button is-primary '} type="submit">Save</button>
-                </div>
             </form>
         </div>
     );

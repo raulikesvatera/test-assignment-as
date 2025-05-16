@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Modal from '../modal/Modal';
 import { resetFormData } from "./filterSlice";
 import FilterForm from "./FilterForm";
+import FilterFormButtons from "./FilterFormButtons";
 import { useFilterForm } from "./hooks/useFilterForm";
 
 const Filter = () => {
@@ -23,6 +24,7 @@ const Filter = () => {
             { !stateFilter.isModalDialogMode && stateFilter.formIsVisible &&
                 <div className={'box'}>
                     <FilterForm></FilterForm>
+                    <FilterFormButtons></FilterFormButtons>
                 </div>
             }
             <div className={'box'}>
