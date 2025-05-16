@@ -2,43 +2,42 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\FilterCriteriaRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: FilterCriteriaRepository::class)]
-#[ApiResource]
+
 class FilterCriteria
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['filter:read', 'filter:update'])]
+    #[Groups(['filter:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['filter:read', 'filter:update', 'filter:write'])]
+    #[Groups(['filter:read'])]
     #[Assert\NotBlank(message: 'The criteria field field cannot be empty')]
     private ?string $field = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['filter:read', 'filter:update', 'filter:write'])]
+    #[Groups(['filter:read'])]
     #[Assert\NotBlank(message: 'The criteria condition type field cannot be empty')]
     private ?string $condition_type = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['filter:read', 'filter:update', 'filter:write'])]
+    #[Groups(['filter:read'])]
     #[Assert\NotBlank(message: 'The criteria value field cannot be empty')]
     private ?string $value = null;
 
 //    #[ORM\Column(name: "filter_id", nullable: true)]
-//    #[Groups(['filter:read', 'filter:update', 'filter:write'])]
+//    #[Groups(['filter:read'])]
 //    private ?int $filter_id = null;
 
     #[ORM\ManyToOne(targetEntity: Filter::class, inversedBy: 'filterCriteriaCollection')]
-    #[Groups(['filter:read', 'filter:update', 'filter:write'])]
+//    #[Groups(['filter:read'])]
     private ?Filter $filter = null;
 
     public function getFilter(): ?Filter

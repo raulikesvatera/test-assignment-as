@@ -3,15 +3,15 @@
 namespace App\Entity;
 
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
-use ApiPlatform\Metadata\ApiResource;
+//use ApiPlatform\Metadata\ApiResource;
 use App\Repository\FilterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FilterRepository::class)]
-#[ApiResource]
 class Filter
 {
     #[ORM\Id]
@@ -37,6 +37,7 @@ class Filter
         minMessage: 'Filter must have at least one criteria'
     )]
     #[Assert\Valid]
+    #[\Symfony\Component\Serializer\Annotation\MaxDepth(1)]
     private Collection $filterCriteriaCollection;
 
     public function __construct()
