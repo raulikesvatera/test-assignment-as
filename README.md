@@ -26,5 +26,4 @@ docker exec -it test-assignment-as-php-1 /bin/bash -c "cd assets/react-app && np
 docker exec -it test-assignment-as-php-1 /bin/bash -c "cd assets/react-app && npm run build"
 docker exec -it test-assignment-as-php-1 php bin/console doctrine:schema:create
 docker exec -it test-assignment-as-php-1 php bin/console doctrine:fixtures:load -n
-docker exec -it test-assignment-as-php-1 chown -R www-data:www-data .
 ```
