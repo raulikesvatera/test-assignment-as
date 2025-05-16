@@ -12,9 +12,9 @@ import 'react-notifications-component/dist/theme.css'
 function App() {
   return (
     <div className="section">
+        <ReactNotifications></ReactNotifications>
         <div className="container">
             <Provider store={store}>
-                <ReactNotifications></ReactNotifications>
                 <Filter></Filter>
             </Provider>
         </div>
