@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -rf /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+/etc/init.d/apache2 reload || true
